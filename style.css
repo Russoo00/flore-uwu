@@ -1,0 +1,157 @@
+/* --- FONDO PERSONALIZABLE --- */
+/* Pega el link de tu imagen o GIF animado aquí abajo */
+body {
+    background-image: url('https://i.pinimg.com/originals/81/a4/c8/81a4c8a29a8a25a3c932594611aa0a86.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Georgia', serif;
+    overflow: hidden; /* Evita barras de scroll por las animaciones */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #3b3b3b;
+    text-align: center;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 600px;
+}
+
+h1 {
+    color: #5a3a22;
+}
+
+/* --- El Ramo --- */
+.bouquet {
+    position: relative;
+    width: 250px;
+    height: 300px;
+    margin: 40px auto;
+    cursor: pointer;
+    transform-origin: bottom center;
+    animation: bouquet-sway 5s ease-in-out infinite;
+}
+
+/* Envoltura de papel Kraft */
+.paper-wrap {
+    position: absolute;
+    width: 280px;
+    height: 150px;
+    background-color: #d2b48c; /* Color papel kraft */
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.paper-wrap::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background: #b1916c;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%) rotate(5deg);
+    border-radius: 5px;
+}
+
+
+/* --- Las Flores Amarillas --- */
+.flower {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    width: 10px; /* Tallo */
+    height: 150px;
+    background: linear-gradient(#228b22, #556b2f);
+    transform-origin: bottom center;
+}
+
+.flower::before, .flower::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 50px;
+    height: 50px;
+    background-color: #ffd700; /* Amarillo dorado */
+    border-radius: 50% 0;
+    transform-origin: bottom right;
+    animation: bloom 2s ease-in-out infinite alternate;
+}
+
+.flower::after {
+    transform: rotate(90deg);
+    left: -15px;
+    animation-delay: 0.5s;
+}
+
+/* Posicionamiento y rotación de cada flor para formar el ramo */
+.flower:nth-child(1) { transform: translateX(-50%) rotate(-20deg); height: 160px; }
+.flower:nth-child(2) { transform: translateX(-50%) rotate(15deg); height: 180px; }
+.flower:nth-child(3) { transform: translateX(-50%) rotate(-5deg); height: 200px; }
+.flower:nth-child(4) { transform: translateX(-50%) rotate(25deg); height: 170px; }
+.flower:nth-child(5) { transform: translateX(-50%) rotate(-15deg); height: 190px; }
+.flower:nth-child(6) { transform: translateX(-50%) rotate(5deg); height: 180px; }
+.flower:nth-child(7) { transform: translateX(-50%) rotate(0deg); height: 160px; }
+
+
+/* --- La Abejita --- */
+.bee {
+    position: absolute;
+    width: 20px;
+    height: 12px;
+    background: linear-gradient(90deg, #ffd700 40%, black 40%, black 60%, #ffd700 60%);
+    border-radius: 50%;
+    z-index: 10;
+    pointer-events: none; /* Para que no interfieran con otros clics */
+    animation: bee-fly 4s linear infinite;
+}
+
+.bee::before, .bee::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(220, 220, 220, 0.8);
+    border-radius: 50%;
+    top: -4px;
+    left: 4px;
+    animation: flap-wings 0.1s linear infinite;
+}
+
+.bee::after {
+    left: 10px;
+    animation-delay: 0.05s;
+}
+
+/* --- Animaciones --- */
+@keyframes bouquet-sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+@keyframes bloom {
+    from { transform: scale(0.9) rotate(-5deg); }
+    to { transform: scale(1.05) rotate(5deg); }
+}
+
+@keyframes bee-fly {
+    0% { transform: translate(0, 0); opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translate(var(--end-x), var(--end-y)); opacity: 0; }
+}
+
+@keyframes flap-wings {
+    from { transform: scaleY(1); }
+    to { transform: scaleY(-1); }
+}
